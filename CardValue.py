@@ -10,10 +10,11 @@ class CardValue:
         "7" : 7,
         "8" : 8,
         "9" : 9,
-        "J" : 10,
-        "Q" : 11,
-        "K" : 12,
-        "A" : 13,
+        "10": 10,
+        "J" : 11,
+        "Q" : 12,
+        "K" : 13,
+        "A" : 14,
     }
 
 
@@ -28,7 +29,7 @@ class CardValue:
     def get_hand_value(self, hand):
         pass
 
-    def find_hand_name(self, cards):
+    def find_card_score(self, cards):
         """
 
         input format:
@@ -98,6 +99,7 @@ class CardValue:
             for rank in ranks:
                 diff1 = diff1 + 1 if rank - last == 1 else 0
                 if diff1 == 4:
+                    print("Found straight flush")
                     return True
                 last = rank
         return False
@@ -128,6 +130,7 @@ class CardValue:
 
     def has_flush(self, cards):
         dist = self.get_card_dist(cards, 1)
+        print("flush check")
         return max(map(lambda x: dist[x], dist)) >= 5
 
     def has_straight(self, cards):
@@ -137,6 +140,7 @@ class CardValue:
         for rank in ranks:
             diff1 = diff1 + 1 if rank - last == 1 else 0
             if diff1 == 4:
+                print("Found straight")
                 return True
             last = rank
         return False
@@ -198,13 +202,13 @@ if __name__ == '__main__':
     assert False == CardValue().has_poker([('10', 'spades'), ('10', 'hearts'), ('9', 'clubs'), ('8', 'clubs'), ('10', 'diamonds')])
     assert True == CardValue().has_poker([('10', 'spades'), ('10', 'hearts'), ('10', 'clubs'), ('8', 'clubs'), ('10', 'diamonds')])
 
-    assert False == CardValue().has_full_house([('1', 'spades'), ('2', 'hearts')])
+    assert False == CardValue().has_full_house([('10', 'spades'), ('2', 'hearts')])
     assert False == CardValue().has_full_house([('2', 'spades'), ('4', 'hearts'), ('4', 'spades'), ('4', 'hearts'), ('4', 'hearts')])
     assert True == CardValue().has_full_house([('2', 'spades'), ('2', 'hearts'), ('4', 'spades'), ('4', 'hearts'), ('4', 'hearts')])
 
-    assert False == CardValue().has_flush([('1', 'spades'), ('2', 'hearts')])
+    assert False == CardValue().has_flush([('10', 'spades'), ('2', 'hearts')])
     assert False == CardValue().has_flush([('5', 'spades'), ('6', 'spades'), ('7', 'spades'), ('8', 'spades'), ('9', 'hearts')])
-    assert True == CardValue().has_flush([('1', 'spades'), ('2', 'spades'), ('3', 'spades'), ('2', 'spades'), ('4', 'spades')])
+    assert True == CardValue().has_flush([('4', 'spades'), ('2', 'spades'), ('3', 'spades'), ('2', 'spades'), ('4', 'spades')])
 
     assert False == CardValue().has_straight([('10', 'spades'), ('2', 'hearts')])
     assert False == CardValue().has_straight([('10', 'spades'), ('2', 'hearts'), ('3', 'spades'), ('2', 'hearts'), ('4', 'hearts')])
@@ -223,6 +227,16 @@ if __name__ == '__main__':
 
     assert False == CardValue().has_high([('10', 'spades'), ('2', 'hearts')])
     assert True == CardValue().has_high([('K', 'spades'), ('2', 'hearts')])
+
+if __name__ == '__main__':
+    c = CardValue()
+    print(c.find_card_score([('10', 'spades'), ('10', 'hearts'), ('10', 'clubs'), ('8', 'clubs'), ('10', 'diamonds')]))
+    print(c.find_card_score([('2', 'spades'), ('2', 'hearts'), ('4', 'spades'), ('4', 'hearts'), ('4', 'hearts')]))
+    print(c.find_card_score([('10', 'spades'), ('2', 'spades'), ('3', 'spades'), ('2', 'spades'), ('4', 'spades')]))
+    print(c.find_card_score([('3', 'spades'), ('4', 'hearts'), ('5', 'spades'), ('6', 'hearts'), ('7', 'hearts')]))
+    print(c.find_card_score([('K', 'spades'), ('3', 'hearts'), ('3', 'spades'), ('K', 'hearts'), ('K', 'hearts')]))
+    print(c.find_card_score([('2', 'spades'), ('2', 'hearts'), ('4', 'spades'), ('4', 'hearts'), ('7', 'hearts')]))
+    print(c.find_card_score([('2', 'spades'), ('2', 'hearts')]))
 
 
     #print(CardValue().find_hand_name(cards))
