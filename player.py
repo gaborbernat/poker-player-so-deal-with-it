@@ -4,7 +4,7 @@ import logging
 class Player:
     VERSION = "Smart hands only"
     order = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-    team_name = "So Deal With It"
+    team_name = "So Deal With It "
     good_cards = [['A', 'A'], ['K', 'K'], ['Q', 'Q'], ['A', 'K'], ['J', 'J'], ['A', 'Q'], ['K', 'Q'], ['A', 'J'],
                   ['K', 'J'], ['10', '10'], ['A', 'K'], ['A', '10'], ['Q', 'J'], ['K', '10'], ['Q', '10'], ['J', '10'],
                   ['9', '9'], ['A', 'Q'], ['A', '9'], ['K', 'Q'], ['8', '8'], ['K', '9'], ['10', '9'], ['A', '8'],
