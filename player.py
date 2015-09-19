@@ -19,7 +19,7 @@ def transform_card(l):
 
 
 class Player:
-    VERSION = "1.3.3 - {}".format(config.get('version', 'unknown'))
+    VERSION = "1.3.4 - {}".format(config.get('version', 'unknown'))
     order = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     team_name = "So Deal With It "
 
@@ -29,14 +29,15 @@ class Player:
         hand_win_perc = self.hand_win_percentage(hand)
 
         raise_amount = self.action_raise(game_state, amount=1)
+        all_amount = self.action_all_in(game_state)
 
         if self.is_pref_flop(game_state):
             if hand_win_perc >= config.get('all_in_perc', 14.8):
                 return raise_amount
             if hand_win_perc >= config.get('min_raise_perc', 12):
-                return min(raise_amount, config.get('max_raise', 500))
+                return min(raise_amount, all_amount / 2)
             if hand_win_perc > config.get('min_raise_perc_attemptive', 10):
-                return min(raise_amount, config.get('max_attemptive_raise', 200))
+                return min(raise_amount, all_amount / 4)
             else:
                 return 0
         else:
@@ -49,7 +50,9 @@ class Player:
             if score <= config.get('min_score', 80):
                 return 0
             else:
-                return raise_amount
+                if score > 200:
+                    return raise_amount
+                return min(raise_amount, all_amount / 2)
 
     def is_pref_flop(self, game_state):
         return len(self.get_community_cards(game_state)) == 0
