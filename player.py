@@ -32,7 +32,7 @@ class Player:
             if hand_win_perc > 12:
                 return min(raise_amount, 500)
             else:
-                return check_amount
+                return max(check_amount, 80)
         else:
             if hand_win_perc < 12:
                 return check_amount
