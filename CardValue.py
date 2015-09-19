@@ -96,6 +96,22 @@ class CardValue:
         return sum([self.order.index(x[0]) for x in cards])
 
     def has_straight_flush(self, cards):
+        dist = self.get_card_dist(cards, 1)
+        suit = None
+        for card in dist.iteritems():
+            if card[1] >= 5:
+                suit = card[0]
+        if suit:
+            cards = filter(lambda x: x[1] == suit, cards)
+
+            ranks = sorted(map(lambda x: self.order.index(x), map(lambda x: x[0], cards)))
+            diff1 = 0
+            last = -100
+            for rank in ranks:
+                diff1 = diff1 + 1 if rank - last == 1 else 0
+                if diff1 == 4:
+                    return True
+                last = rank
         return False
 
     def has_poker(self, cards):
