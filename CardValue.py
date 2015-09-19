@@ -105,7 +105,8 @@ class CardValue:
         return False
 
     def has_flush(self, cards):
-        return False
+        dist = self.get_card_dist(cards, 1)
+        return max(map(lambda x: dist[x], dist)) >= 5
 
     def has_staight(self, cards):
         return False
