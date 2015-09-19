@@ -143,8 +143,8 @@ class CardValue:
                 return True
         return False
 
-    def get_card_dist(self, cards):
-        return {card[0]: len([x for x in cards if x[0] == card[0]]) for card in cards}
+    def get_card_dist(self, cards, id=0):
+        return {card[id]: len([x for x in cards if x[id] == card[id]]) for card in cards}
 
 
 
