@@ -5,6 +5,8 @@ import urllib2
 
 __author__ = 'bnc'
 
+CONFIG_URL = "https://dl.dropboxusercontent.com/u/819938/leanpoker/config.json"
+
 class RemoteConfig(object):
     lastLoaded = None
     config = None
@@ -30,8 +32,10 @@ class RemoteConfig(object):
 
 
 class TestRemoteConfig(unittest.TestCase):
+    TEST_CONFIG = "https://dl.dropboxusercontent.com/u/819938/leanpoker/test_config.json"
+
     def setUp(self):
-        self.config = RemoteConfig("https://dl.dropboxusercontent.com/u/819938/leanpoker/test_config.json")
+        self.config = RemoteConfig(self.TEST_CONFIG)
 
     def test_config(self):
         startTime = time.time()
@@ -43,4 +47,4 @@ class TestRemoteConfig(unittest.TestCase):
         self.assertLess(endTime - startTime, 0.8)
 
 
-config = RemoteConfig("https://dl.dropboxusercontent.com/u/819938/leanpoker/config.json")
+config = RemoteConfig(CONFIG_URL)
