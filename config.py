@@ -24,7 +24,7 @@ class RemoteConfig(object):
     def _load(self):
         currentTime = time.time()
         if self.config == None or self.lastLoaded == None or currentTime - self.lastLoaded > self.reloadTime:
-            self.config = json.loads(urllib2.urlopen(self.configUrl).read())
+            self.config = json.loads(urllib2.urlopen(self.configUrl, timeout=1.5).read())
             self.lastLoaded = currentTime
             self.reloadTime = self.get('reload_time', self.reloadTime)
 
@@ -41,3 +41,6 @@ class TestRemoteConfig(unittest.TestCase):
         endTime = time.time()
 
         self.assertLess(endTime - startTime, 0.8)
+
+
+config = RemoteConfig("https://dl.dropboxusercontent.com/u/819938/leanpoker/config.json")

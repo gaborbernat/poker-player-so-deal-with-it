@@ -1,3 +1,4 @@
+from config import config
 
 class CardValue:
 
@@ -56,31 +57,31 @@ class CardValue:
         result = sum([self.order.index(x[0]) for x in cards])
 
         if self.has_straight_flush(cards):
-            return result * 100
+            return result * config.get('straight_flush', 100)
 
         if self.has_poker(cards):
-            return result * 80
+            return result * config.get('poker', 80)
 
         if self.has_full_house(cards):
-            return result * 60
+            return result * config.get('full_house', 60)
 
         if self.has_flush(cards):
-            return result * 50
+            return result * config.get('flush', 50)
 
         if self.has_straight(cards):
-            return result * 40
+            return result * config.get('straight', 40)
 
         if self.has_drill(cards):
-            return result * 30
+            return result * config.get('drill', 30)
 
         if self.has_2p(cards):
-            return result * 20
+            return result * config.get('2pairs', 20)
 
         if self.has_p(cards):
-            return result * 10
+            return result * config.get('pair', 10)
 
         if self.has_high(cards):
-            return result * 5
+            return result * config.get('high', 5)
 
         return sum([self.order.index(x[0]) for x in cards])
 
