@@ -24,26 +24,26 @@ state = {"type": "bet", "on_turn": 2,
                                             {"rank": "A", "suit": "clubs"}], "current_buy_in": 601, "pot": 821}}
 flop_state = {
   "type": "bet",
-  "on_turn": 1,
-  "message": "LeanMasters made a bet of 0 (fold) and is left with 630 chips. The pot now contains 1070 chips.",
+  "on_turn": 4,
+  "message": "PokerMinds made a bet of 123 (raise) and is left with 877 chips. The pot now contains 244 chips.",
   "game_state": {
     "tournament_id": "55e6f2bb0708790003000002",
-    "game_id": "55fd4bd21474db00030000a9",
-    "round": 6,
+    "game_id": "55fd6ca1476ce4000300015e",
+    "round": 3,
     "players": [
       {
         "name": "booLean",
         "stack": 970,
-        "status": "folded",
-        "bet": 0,
+        "status": "active",
+        "bet": 20,
         "hole_cards": [
           {
-            "rank": "10",
+            "rank": "K",
             "suit": "hearts"
           },
           {
-            "rank": "5",
-            "suit": "hearts"
+            "rank": "6",
+            "suit": "diamonds"
           }
         ],
         "version": "Default PHP folding player",
@@ -51,53 +51,44 @@ flop_state = {
       },
       {
         "name": "LeanMasters",
-        "stack": 630,
-        "status": "active",
-        "bet": 20,
-        "hole_cards": [
-          {
-            "rank": "5",
-            "suit": "diamonds"
-          },
-          {
-            "rank": "7",
-            "suit": "spades"
-          }
-        ],
+        "stack": 0,
+        "status": "out",
+        "bet": 0,
+        "hole_cards": [],
         "version": "Enjoy",
         "id": 1
       },
       {
         "name": "So Deal With It ",
-        "stack": 720,
+        "stack": 929,
         "status": "active",
-        "bet": 80,
+        "bet": 61,
         "hole_cards": [
           {
-            "rank": "3",
-            "suit": "diamonds"
+            "rank": "5",
+            "suit": "spades"
           },
           {
             "rank": "6",
-            "suit": "clubs"
+            "suit": "hearts"
           }
         ],
-        "version": "Smart hands only with a twist",
+        "version": "1.3.1 - bnc's magic config",
         "id": 2
       },
       {
         "name": "AsdfLEAN",
-        "stack": 0,
-        "status": "active",
-        "bet": 950,
+        "stack": 1980,
+        "status": "folded",
+        "bet": 20,
         "hole_cards": [
           {
-            "rank": "J",
-            "suit": "spades"
+            "rank": "Q",
+            "suit": "diamonds"
           },
           {
-            "rank": "Q",
-            "suit": "spades"
+            "rank": "9",
+            "suit": "hearts"
           }
         ],
         "version": "AsdfLEAN 1.8",
@@ -105,17 +96,17 @@ flop_state = {
       },
       {
         "name": "PokerMinds",
-        "stack": 1610,
-        "status": "folded",
-        "bet": 20,
+        "stack": 877,
+        "status": "active",
+        "bet": 143,
         "hole_cards": [
           {
-            "rank": "3",
+            "rank": "8",
             "suit": "spades"
           },
           {
-            "rank": "J",
-            "suit": "hearts"
+            "rank": "K",
+            "suit": "diamonds"
           }
         ],
         "version": "Default Java folding player",
@@ -123,13 +114,27 @@ flop_state = {
       }
     ],
     "small_blind": 10,
-    "orbits": 1,
-    "dealer": 2,
-    "community_cards": [],
-    "current_buy_in": 950,
-    "pot": 1070
+    "orbits": 0,
+    "dealer": 4,
+    "community_cards": [
+      {
+        "rank": "8",
+        "suit": "hearts"
+      },
+      {
+        "rank": "6",
+        "suit": "clubs"
+      },
+      {
+        "rank": "3",
+        "suit": "hearts"
+      }
+    ],
+    "current_buy_in": 143,
+    "pot": 244
   }
 }
+
 
 if __name__ == '__main__':
     p = Player()
