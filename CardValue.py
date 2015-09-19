@@ -66,7 +66,7 @@ class CardValue:
 
         result = sum([self.order.index(x[0]) for x in cards])
 
-        if self.straight_flush(cards):
+        if self.has_straight_flush(cards):
             return result * 100
 
         if self.has_poker(cards):
@@ -78,7 +78,7 @@ class CardValue:
         if self.has_flush(cards):
             return result * 50
 
-        if self.has_staight(cards):
+        if self.has_straight(cards):
             return result * 40
 
         if self.has_drill(cards):
@@ -95,7 +95,7 @@ class CardValue:
 
         return sum([self.order.index(x[0]) for x in cards])
 
-    def straight_flush(self, cards):
+    def has_straight_flush(self, cards):
         return False
 
     def has_poker(self, cards):
@@ -108,7 +108,15 @@ class CardValue:
         dist = self.get_card_dist(cards, 1)
         return max(map(lambda x: dist[x], dist)) >= 5
 
-    def has_staight(self, cards):
+    def has_straight(self, cards):
+        ranks = sorted(map(lambda x: self.order.index(x), map(lambda x: x[0], cards)))
+        diff1 = 0
+        last = -100
+        for rank in ranks:
+            diff1 = diff1 + 1 if rank - last == 1 else 0
+            if diff1 == 4:
+                return True
+            last = rank
         return False
 
     def has_drill(self, cards):
