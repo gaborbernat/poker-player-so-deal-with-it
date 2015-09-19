@@ -19,7 +19,7 @@ class Player:
     def should_we_fold(self, hand):
         our_hand = self.order_cards([hand[0]['rank'], hand[1]['rank']])
         percentage = hands[tuple(our_hand)]
-        return percentage > 10
+        return percentage < 10
 
     def order_cards(self, elements):
         return sorted(elements, key=lambda x: -1 * self.order.index(x))
