@@ -36,6 +36,8 @@ class Player:
                 return all_in_amount
             if hand_win_perc > config.get('min_raise_perc', 12):
                 return min(raise_amount, config.get('max_raise', 500))
+            if hand_win_perc > config.get('min_raise_perc', 10):
+                return min(raise_amount, config.get('max_attemptive_raise', 100))
             else:
                 return 0
         else:
