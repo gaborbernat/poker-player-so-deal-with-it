@@ -57,31 +57,31 @@ class CardValue:
         result = sum([self.order.index(x[0]) for x in cards])
 
         if self.has_straight_flush(cards):
-            return result * config.get('straight_flush', 100)
+            return result + config.get('straight_flush', 1000)
 
         if self.has_poker(cards):
-            return result * config.get('poker', 80)
+            return result + config.get('poker', 800)
 
         if self.has_full_house(cards):
-            return result * config.get('full_house', 60)
+            return result + config.get('full_house', 600)
 
         if self.has_flush(cards):
-            return result * config.get('flush', 50)
+            return result + config.get('flush', 500)
 
         if self.has_straight(cards):
-            return result * config.get('straight', 40)
+            return result + config.get('straight', 400)
 
         if self.has_drill(cards):
-            return result * config.get('drill', 30)
+            return result + config.get('drill', 300)
 
         if self.has_2p(cards):
-            return result * config.get('2pairs', 20)
+            return result + config.get('2pairs', 200)
 
         if self.has_p(cards):
-            return result * config.get('pair', 10)
+            return result + config.get('pair', 100)
 
         if self.has_high(cards):
-            return result * config.get('high', 5)
+            return result + config.get('high', 50)
 
         return sum([self.order.index(x[0]) for x in cards])
 
