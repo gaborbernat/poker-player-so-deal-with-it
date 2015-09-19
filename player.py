@@ -32,7 +32,9 @@ class Player:
             if hand_win_perc > 12:
                 return min(raise_amount, 500)
             else:
-                return max(check_amount, 80)
+                if check_amount >= all_in_amount:
+                    return 0
+                return check_amount
         else:
             if hand_win_perc < 12:
                 return check_amount
@@ -57,16 +59,21 @@ class Player:
 
     def action_all_in(self, game_state):
         # current buy in + all the money we still have
-        return r(game_state, ['current_buy_in'], 0) + self.get_our_player(game_state).get("stack", 0)
+        return self.get_our_player(game_state).get("stack", 0)
 
     def action_check(self, game_state):
         # current buy in - our chips = check (or fold is there is another raise)
-        return r(game_state, ['current_buy_in'], 0) - self.get_our_player(game_state).get("bet", 0)
+        return r(game_state, ['current_buy_in'], 0)
 
     def action_raise(self, game_state, amount=0):
         # current buy in + minimal raise + raise you want to do
-        return r(game_state, ['current_buy_in'], 0) - self.get_our_player(game_state).get("bet", 0) + \
-               r(game_state, ['minimum_raise'], 0) + amount
+        current_buy_in = r(game_state, ['current_buy_in'], 0)
+        us = self.get_our_player(game_state)
+        already_bet = us.get("bet", 0)
+        minimum_raise = r(game_state, ['minimum_raise'], 0)
+        our_stack = us.get("stack")
+        result = max(minimum_raise, min(our_stack, current_buy_in + already_bet + amount))
+        return result
 
     @staticmethod
     def get_cards(player):
@@ -82,3 +89,4 @@ if __name__ == '__main__':
     p = Player()
     print(p.hand_win_percentage([dict(rank='A'), dict(rank='A')]))
     print(p.hand_win_percentage([dict(rank='2'), dict(rank='8')]))
+    print(p.hand_win_percentage([dict(rank='A'), dict(rank='4')]))
