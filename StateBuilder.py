@@ -37,6 +37,14 @@ class PlayerMock(dictlike):
         self.hole_cards.extend(cards)
         return self
 
+    def withBet(self, bet):
+        self.bet = bet
+        return self
+
+    def withStack(self, stack):
+        self.stack = stack
+        return self
+
 class MyPlayer(PlayerMock):
     def __init__(self):
         PlayerMock.__init__(self, "So Deal With It ")
@@ -63,6 +71,8 @@ class StateBuilder:
     def __init__(self):
         self.players = []
         self.cards = []
+        self.current_buy_in = 500
+        self.pot = 550
     
     def withPlayer(self, player):
         self.players.append(player)
@@ -72,6 +82,14 @@ class StateBuilder:
         self.cards.extend(cards)
         return self
         
+    def withBuyIn(self, buyin):
+        self.current_buy_in = buyin
+        return self
+
+    def withPot(self, pot):
+        self.pot = pot
+        return self
+
     def build(self):
         state = copy.deepcopy(self.stateTemplate)
         state["players"] = self.players
