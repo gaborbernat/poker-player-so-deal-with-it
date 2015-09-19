@@ -22,11 +22,25 @@ class Player:
         hand = self.get_cards(us)
         hand_win_perc = self.hand_win_percentage(hand)
 
+        raise_amount = self.action_raise(game_state, amount=1)
+        all_in_amount = self.action_all_in(game_state)
+        check_amount = self.action_check(game_state)
+
         if self.is_pref_flop(game_state):
-            return self.action_all_in(game_state) if hand_win_perc > 18 else (
-                self.action_raise(game_state, amount=1) if hand_win_perc > 15 else self.action_check(game_state))
+            if hand_win_perc > 18:
+                return all_in_amount
+            if hand_win_perc > 15 and raise_amount >= all_in_amount:
+                return raise_amount
+            else:
+                if hand_win_perc > 15:
+                    return check_amount
+                else:
+                    return 0
         else:
-            return self.action_check(game_state) if hand_win_perc < 15 else self.action_raise(game_state, amount=1)
+            if hand_win_perc < 15:
+                return check_amount
+            else:
+                return raise_amount
 
     def is_pref_flop(self, game_state):
         return len(self.get_community_cards(game_state)) == 0
