@@ -1,4 +1,5 @@
 import logging
+import random
 from CardValue import CardValue
 from config import config
 from hands import hands
@@ -23,6 +24,9 @@ class Player:
     order = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     team_name = "So Deal With It "
 
+    def is_irational(self, config):
+        return random.random() > config.get('randomness', 0.5)
+
     def betRequest(self, game_state):
         us = self.get_our_player(game_state)
         hand = self.get_cards(us)
@@ -36,8 +40,12 @@ class Player:
             if hand_win_perc >= config.get('all_in_perc', 14.8):
                 return raise_amount
             if hand_win_perc >= config.get('min_raise_perc', 12):
+                if self.is_irational(config):
+                    return raise_amount
                 return min(raise_amount, all_amount / 2)
             if hand_win_perc > config.get('min_raise_perc_attemptive', 10):
+                if self.is_irational(config):
+                    return raise_amount
                 return min(raise_amount, all_amount / 4)
             else:
                 return 0
@@ -52,9 +60,13 @@ class Player:
             if score <= config.get('min_score_1', 20):
                 return 0
             elif score <= config.get('min_score_2', 80):
+                if self.is_irational(config):
+                    return all_amount
                 return min(check_amount, all_amount / 3)
             else:
                 if score > config.get('min_score_3', 200):
+                    if self.is_irational(config):
+                        return raise_amount
                     return raise_amount
                 return min(raise_amount, all_amount / 2)
 
