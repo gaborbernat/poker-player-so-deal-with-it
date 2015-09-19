@@ -52,18 +52,6 @@ class CardValue:
         #cards = sorted(cards, key=lambda x: x[1])
         print(cards)
 
-
-        # is straight flush
-        # poker
-        # full house
-        # flush
-        # staight
-        # drill
-        # 2p
-        # p
-        # high
-        # nothing
-
         result = sum([self.order.index(x[0]) for x in cards])
 
         if self.has_straight_flush(cards):
