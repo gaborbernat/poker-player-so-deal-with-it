@@ -9,8 +9,9 @@ class Scenarios:
 if __name__ == '__main__':
     p = Player()
     state = StateBuilder()\
-        .withPlayer(MyPlayer().withCards((Card("K"),Card("A"),)))\
+        .withPlayer(MyPlayer().withCards((Card("K"),Card("K"),)))\
         .withPlayer(PlayerMock())\
+        .withCommunityCards((Card("7", "diamonds"), Card("7", "spades"), Card("7", "hearts"),))\
         .build()
 
     print p.betRequest(state)

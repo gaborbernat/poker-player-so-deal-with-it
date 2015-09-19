@@ -70,6 +70,7 @@ class StateBuilder:
 
     def withCommunityCards(self, cards):
         self.cards.extend(cards)
+        return self
         
     def build(self):
         state = copy.deepcopy(self.stateTemplate)
