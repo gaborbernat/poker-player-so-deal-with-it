@@ -1,4 +1,5 @@
 import logging
+from CardValue import CardValue
 from hands import hands
 
 
@@ -13,7 +14,7 @@ def r(w, i, d):
 
 
 class Player:
-    VERSION = "1.0.1"
+    VERSION = "1.0.2"
     order = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     team_name = "So Deal With It "
 
@@ -32,14 +33,11 @@ class Player:
             if hand_win_perc > 12:
                 return min(raise_amount, 500)
             else:
-                if check_amount >= all_in_amount:
-                    return 0
-                return check_amount
+                return 0
         else:
-            if hand_win_perc < 12:
-                if check_amount >= all_in_amount:
-                    return 0
-                return all_in_amount
+            # CardValue().find_card_score(sszes lap) - CardValue().find_card_score(commutiy lap)
+            if hand_win_perc < 11:
+                return 0
             else:
                 return raise_amount
 

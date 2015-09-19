@@ -3,25 +3,25 @@ from player import Player
 state = {
     "type": "bet",
     "on_turn": 1,
-    "message": "LeanMasters made a bet of 0 (fold) and is left with 580 chips. The pot now contains 2020 chips.",
+    "message": "LeanMasters made a bet of 0 (fold) and is left with 970 chips. The pot now contains 230 chips.",
     "game_state": {
         "tournament_id": "55e6f2bb0708790003000002",
-        "game_id": "55fd423b1474db000300009c",
-        "round": 7,
+        "game_id": "55fd4e431474db00030000ca",
+        "round": 1,
         "players": [
             {
                 "name": "booLean",
-                "stack": 940,
+                "stack": 990,
                 "status": "folded",
                 "bet": 0,
                 "hole_cards": [
                     {
-                        "rank": "2",
-                        "suit": "diamonds"
+                        "rank": "9",
+                        "suit": "spades"
                     },
                     {
-                        "rank": "3",
-                        "suit": "hearts"
+                        "rank": "J",
+                        "suit": "diamonds"
                     }
                 ],
                 "version": "Default PHP folding player",
@@ -29,17 +29,17 @@ state = {
             },
             {
                 "name": "LeanMasters",
-                "stack": 580,
+                "stack": 970,
                 "status": "active",
                 "bet": 10,
                 "hole_cards": [
                     {
-                        "rank": "5",
-                        "suit": "diamonds"
+                        "rank": "A",
+                        "suit": "clubs"
                     },
                     {
-                        "rank": "K",
-                        "suit": "clubs"
+                        "rank": "4",
+                        "suit": "hearts"
                     }
                 ],
                 "version": "Enjoy",
@@ -47,35 +47,35 @@ state = {
             },
             {
                 "name": "So Deal With It ",
-                "stack": 1460,
+                "stack": 960,
                 "status": "active",
                 "bet": 20,
                 "hole_cards": [
                     {
-                        "rank": "A",
+                        "rank": "3",
                         "suit": "hearts"
                     },
                     {
-                        "rank": "4",
-                        "suit": "spades"
+                        "rank": "7",
+                        "suit": "hearts"
                     }
                 ],
-                "version": "Smart hands only with a twist",
+                "version": "1.0.1",
                 "id": 2
             },
             {
                 "name": "AsdfLEAN",
-                "stack": 0,
-                "status": "active",
-                "bet": 1990,
+                "stack": 1050,
+                "status": "folded",
+                "bet": 0,
                 "hole_cards": [
                     {
-                        "rank": "8",
-                        "suit": "hearts"
+                        "rank": "6",
+                        "suit": "spades"
                     },
                     {
-                        "rank": "A",
-                        "suit": "diamonds"
+                        "rank": "7",
+                        "suit": "clubs"
                     }
                 ],
                 "version": "AsdfLEAN 1.8",
@@ -83,20 +83,29 @@ state = {
             },
             {
                 "name": "PokerMinds",
-                "stack": 0,
-                "status": "out",
-                "bet": 0,
-                "hole_cards": [],
+                "stack": 800,
+                "status": "active",
+                "bet": 200,
+                "hole_cards": [
+                    {
+                        "rank": "10",
+                        "suit": "spades"
+                    },
+                    {
+                        "rank": "A",
+                        "suit": "hearts"
+                    }
+                ],
                 "version": "Default Java folding player",
                 "id": 4
             }
         ],
         "small_blind": 10,
-        "orbits": 1,
+        "orbits": 0,
         "dealer": 0,
         "community_cards": [],
-        "current_buy_in": 1990,
-        "pot": 2020
+        "current_buy_in": 200,
+        "pot": 230
     }
 }
 if __name__ == '__main__':
