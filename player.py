@@ -19,7 +19,7 @@ def transform_card(l):
 
 
 class Player:
-    VERSION = "1.3.5 - {}".format(config.get('version', 'unknown'))
+    VERSION = "1.3.6 - {}".format(config.get('version', 'unknown'))
     order = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     team_name = "So Deal With It "
 
@@ -43,15 +43,16 @@ class Player:
                 return 0
         else:
             community_cards = transform_card(self.get_community_cards(game_state))
+            community_card_count = len(self.get_community_cards(game_state))
             our_cards = transform_card(hand)
             c = CardValue()
             all_score = c.find_card_score(our_cards + community_cards)
             community_score = c.find_card_score(community_cards)
-            score = all_score - community_score
+            score = (all_score - community_score) * (1 - 0.1 * (community_card_count - 1))
             if score <= config.get('min_score_1', 20):
                 return 0
             elif score <= config.get('min_score_2', 80):
-                return min(check_amount, all_amount/3)
+                return min(check_amount, all_amount / 3)
             else:
                 if score > config.get('min_score_3', 200):
                     return raise_amount
