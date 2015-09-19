@@ -22,6 +22,98 @@ state = {"type": "bet", "on_turn": 2,
                         "orbits": 0, "dealer": 1,
                         "community_cards": [{"rank": "6", "suit": "clubs"}, {"rank": "9", "suit": "spades"},
                                             {"rank": "A", "suit": "clubs"}], "current_buy_in": 601, "pot": 821}}
+flop_state = {
+  "type": "bet",
+  "on_turn": 1,
+  "message": "LeanMasters made a bet of 420 (allin) and is left with 0 chips. The pot now contains 1860 chips.",
+  "game_state": {
+    "tournament_id": "55e6f2bb0708790003000002",
+    "game_id": "55fd4e1b1474db00030000c8",
+    "round": 7,
+    "players": [
+      {
+        "name": "booLean",
+        "stack": 1970,
+        "status": "folded",
+        "bet": 0,
+        "hole_cards": [
+          {
+            "rank": "7",
+            "suit": "clubs"
+          },
+          {
+            "rank": "J",
+            "suit": "hearts"
+          }
+        ],
+        "version": "Default PHP folding player",
+        "id": 0
+      },
+      {
+        "name": "LeanMasters",
+        "stack": 0,
+        "status": "active",
+        "bet": 970,
+        "hole_cards": [
+          {
+            "rank": "K",
+            "suit": "diamonds"
+          },
+          {
+            "rank": "10",
+            "suit": "spades"
+          }
+        ],
+        "version": "Enjoy",
+        "id": 1
+      },
+      {
+        "name": "So Deal With It ",
+        "stack": 1170,
+        "status": "active",
+        "bet": 890,
+        "hole_cards": [
+          {
+            "rank": "10",
+            "suit": "diamonds"
+          },
+          {
+            "rank": "9",
+            "suit": "clubs"
+          }
+        ],
+        "version": "1.0.1",
+        "id": 2
+      },
+      {
+        "name": "AsdfLEAN",
+        "stack": 0,
+        "status": "out",
+        "bet": 0,
+        "hole_cards": [],
+        "version": "AsdfLEAN 1.8",
+        "id": 3
+      },
+      {
+        "name": "PokerMinds",
+        "stack": 0,
+        "status": "out",
+        "bet": 0,
+        "hole_cards": [],
+        "version": "Default Java folding player",
+        "id": 4
+      }
+    ],
+    "small_blind": 10,
+    "orbits": 1,
+    "dealer": 0,
+    "community_cards": [],
+    "current_buy_in": 970,
+    "pot": 1860
+  }
+}
+
 if __name__ == '__main__':
     p = Player()
-    print(p.betRequest(state['game_state']))
+    print('bet ' + str(p.betRequest(flop_state['game_state'])))
+    print('bet ' + str(p.betRequest(state['game_state'])))
