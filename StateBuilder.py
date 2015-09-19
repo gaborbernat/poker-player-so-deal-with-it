@@ -11,8 +11,36 @@ class dictlike(object):
 
 class Card(dictlike):
     def __init__(self, rank = "2", suit = "diamonds" ):
-        self.rank = rank
-        self.suit = suit
+        if (len(rank)==1):
+            self.rank = rank
+            self.suit = suit
+        else:
+            self.rank, self.suit = self.fromString(rank)
+
+    def fromString(self, s):
+        if s.startswith("10"):
+            rank = "10"
+            suitChar = s[2:]
+        else:
+            rank = s[0]
+            suitChar = s[1]
+        suit = self.suitFromChar(suitChar)
+        return rank, suit
+        
+    def suitFromChar(self, s):
+        if s == "c":
+            return "clubs"
+        if s == "s":
+            return "spades"
+        if s == "d":
+            return "diamonds"
+        if s == "h":
+            return "hearts"
+        raise AssertionError("Invalid suit character: " + s)
+
+    @staticmethod
+    def buildCards(s):
+        return [ Card(x) for x in s.split() ]
 
 class PlayerMock(dictlike):
     playerTemplate = {

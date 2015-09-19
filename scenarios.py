@@ -10,11 +10,11 @@ if __name__ == '__main__':
     p = Player()
     state = StateBuilder()\
         .withPlayer(MyPlayer()\
-            .withCards((Card("K", "spades"),Card("K", "hearts"),))\
+            .withCards(Card.buildCards("Ks Kh"))\
             .withStack(800))\
         .withPlayer(PlayerMock("C# Team"))\
         .withPlayer(PlayerMock("Java Team"))\
-        .withCommunityCards((Card("7", "diamonds"), Card("7", "spades"), Card("7", "hearts"),))\
+        .withCommunityCards(Card.buildCards("7d 7s 7h"))\
         .withBuyIn(500)\
         .withPot(550)\
         .build()
