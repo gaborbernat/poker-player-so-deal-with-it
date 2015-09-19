@@ -29,12 +29,12 @@ class Player:
         if self.is_pref_flop(game_state):
             if hand_win_perc > 14.8:
                 return all_in_amount
-            if hand_win_perc > 12 and raise_amount >= all_in_amount:
-                return raise_amount
+            if hand_win_perc > 12:
+                return min(raise_amount, 500)
             else:
                 return check_amount
         else:
-            if hand_win_perc < 13:
+            if hand_win_perc < 12:
                 return check_amount
             else:
                 return raise_amount
