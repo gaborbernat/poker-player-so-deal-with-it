@@ -1,5 +1,6 @@
 import logging
 from CardValue import CardValue
+from config import config
 from hands import hands
 
 
@@ -18,7 +19,7 @@ def transform_card(l):
 
 
 class Player:
-    VERSION = "1.2.0"
+    VERSION = "1.2.1"
     order = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     team_name = "So Deal With It "
 
@@ -31,10 +32,10 @@ class Player:
         all_in_amount = self.action_all_in(game_state)
 
         if self.is_pref_flop(game_state):
-            if hand_win_perc > 14.8:
+            if hand_win_perc > config.get('all_in_perc', 14.8):
                 return all_in_amount
-            if hand_win_perc > 12:
-                return min(raise_amount, 500)
+            if hand_win_perc > config.get('min_raise_perc', 12):
+                return min(raise_amount, config.get('max_raise', 500))
             else:
                 return 0
         else:
@@ -44,7 +45,7 @@ class Player:
             all_score = c.find_card_score(our_cards + community_cards)
             community_score = c.find_card_score(community_cards)
             score = all_score - community_score
-            if score <= 80:
+            if score <= config.get('min_score', 80):
                 return 0
             else:
                 return raise_amount
