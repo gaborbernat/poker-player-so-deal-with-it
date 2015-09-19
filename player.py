@@ -18,7 +18,7 @@ def transform_card(l):
 
 
 class Player:
-    VERSION = "1.1.0"
+    VERSION = "1.2.0"
     order = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     team_name = "So Deal With It "
 
