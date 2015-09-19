@@ -13,7 +13,7 @@ def r(w, i, d):
 
 
 class Player:
-    VERSION = "Smart hands only with a twist"
+    VERSION = "1.0"
     order = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     team_name = "So Deal With It "
 
