@@ -1,6 +1,16 @@
 import logging
 from hands import hands
 
+def r(w, i, d):
+    x = w
+    found = False
+    for k in i:
+        if k in x:
+            x = x[k]
+            found = True
+    return x if found else d
+
+
 class Player:
     VERSION = "Smart hands only"
     order = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
@@ -12,6 +22,12 @@ class Player:
         what_to_do = self.should_we_fold(hand)
         logging.info('should we fold {} with {}'.format(what_to_do, hand))
         return 0 if what_to_do else 1000000
+
+    def is_pref_flop(self, game_state):
+        return len(self.get_community_cards(game_state)) == 0
+
+    def get_community_cards(self, game_state):
+        return r(game_state, ['community_cards'], [])
 
     def showdown(self, game_state):
         pass
