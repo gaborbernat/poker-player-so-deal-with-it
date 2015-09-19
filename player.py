@@ -70,5 +70,5 @@ class Player:
 
 if __name__ == '__main__':
     p = Player()
-    assert not p.should_we_fold([dict(rank='A'), dict(rank='A')])
-    assert p.should_we_fold([dict(rank='2'), dict(rank='8')])
+    print(p.hand_win_percentage([dict(rank='A'), dict(rank='A')]))
+    print(p.hand_win_percentage([dict(rank='2'), dict(rank='8')]))
