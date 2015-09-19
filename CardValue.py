@@ -194,36 +194,36 @@ if __name__ == '__main__':
     #
     #assert True == CardValue().straight_flush([('1', 'spades'), ('2', 'hearts')])
 
-    assert False == CardValue().has_poker([('1', 'spades'), ('2', 'hearts')])
+    assert False == CardValue().has_poker([('10', 'spades'), ('2', 'hearts')])
     assert False == CardValue().has_poker([('10', 'spades'), ('10', 'hearts'), ('9', 'clubs'), ('8', 'clubs'), ('10', 'diamonds')])
-    #assert True == CardValue().has_poker([('10', 'spades'), ('10', 'hearts'), ('10', 'clubs'), ('8', 'clubs'), ('10', 'diamonds')])
+    assert True == CardValue().has_poker([('10', 'spades'), ('10', 'hearts'), ('10', 'clubs'), ('8', 'clubs'), ('10', 'diamonds')])
 
     assert False == CardValue().has_full_house([('1', 'spades'), ('2', 'hearts')])
     assert False == CardValue().has_full_house([('2', 'spades'), ('4', 'hearts'), ('4', 'spades'), ('4', 'hearts'), ('4', 'hearts')])
-    #assert True == CardValue().has_full_house([('2', 'spades'), ('2', 'hearts'), ('4', 'spades'), ('4', 'hearts'), ('4', 'hearts')])
+    assert True == CardValue().has_full_house([('2', 'spades'), ('2', 'hearts'), ('4', 'spades'), ('4', 'hearts'), ('4', 'hearts')])
 
     assert False == CardValue().has_flush([('1', 'spades'), ('2', 'hearts')])
     assert False == CardValue().has_flush([('5', 'spades'), ('6', 'spades'), ('7', 'spades'), ('8', 'spades'), ('9', 'hearts')])
-    #assert True == CardValue().has_flush([('1', 'spades'), ('2', 'spades'), ('3', 'spades'), ('2', 'spades'), ('4', 'spades')])
+    assert True == CardValue().has_flush([('1', 'spades'), ('2', 'spades'), ('3', 'spades'), ('2', 'spades'), ('4', 'spades')])
 
-    assert False == CardValue().has_staight([('1', 'spades'), ('2', 'hearts')])
-    assert False == CardValue().has_staight([('1', 'spades'), ('2', 'hearts'), ('3', 'spades'), ('2', 'hearts'), ('4', 'hearts')])
-    #assert True == CardValue().has_staight([('3', 'spades'), ('4', 'hearts'), ('5', 'spades'), ('6', 'hearts'), ('7', 'hearts')])
+    assert False == CardValue().has_straight([('10', 'spades'), ('2', 'hearts')])
+    assert False == CardValue().has_straight([('10', 'spades'), ('2', 'hearts'), ('3', 'spades'), ('2', 'hearts'), ('4', 'hearts')])
+    assert True == CardValue().has_straight([('3', 'spades'), ('4', 'hearts'), ('5', 'spades'), ('6', 'hearts'), ('7', 'hearts')])
 
-    assert False == CardValue().has_drill([('1', 'spades'), ('2', 'hearts')])
-    assert False == CardValue().has_drill([('1', 'spades'), ('2', 'hearts'), ('3', 'spades'), ('2', 'hearts'), ('4', 'hearts')])
+    assert False == CardValue().has_drill([('10', 'spades'), ('2', 'hearts')])
+    assert False == CardValue().has_drill([('10', 'spades'), ('2', 'hearts'), ('3', 'spades'), ('2', 'hearts'), ('4', 'hearts')])
     assert True == CardValue().has_drill([('K', 'spades'), ('3', 'hearts'), ('3', 'spades'), ('K', 'hearts'), ('K', 'hearts')])
 
-    assert False == CardValue().has_2p([('1', 'spades'), ('2', 'hearts')])
-    assert False == CardValue().has_2p([('1', 'spades'), ('2', 'hearts'), ('3', 'spades'), ('2', 'hearts'), ('4', 'hearts')])
+    assert False == CardValue().has_2p([('10', 'spades'), ('2', 'hearts')])
+    assert False == CardValue().has_2p([('10', 'spades'), ('2', 'hearts'), ('3', 'spades'), ('2', 'hearts'), ('4', 'hearts')])
     assert True == CardValue().has_2p([('2', 'spades'), ('2', 'hearts'), ('4', 'spades'), ('4', 'hearts'), ('7', 'hearts')])
 
-    assert False == CardValue().has_p([('1', 'spades'), ('2', 'hearts')])
+    assert False == CardValue().has_p([('10', 'spades'), ('2', 'hearts')])
     assert True == CardValue().has_p([('2', 'spades'), ('2', 'hearts')])
 
-    assert False == CardValue().has_high([('1', 'spades'), ('2', 'hearts')])
+    assert False == CardValue().has_high([('10', 'spades'), ('2', 'hearts')])
     assert True == CardValue().has_high([('K', 'spades'), ('2', 'hearts')])
 
 
-    print(CardValue().find_hand_name(cards))
-    print(CardValue().get_card_dist(cards))
+    #print(CardValue().find_hand_name(cards))
+    #print(CardValue().get_card_dist(cards))
