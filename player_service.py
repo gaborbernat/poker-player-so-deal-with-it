@@ -1,3 +1,4 @@
+import logging
 import time
 import cgi
 import json
@@ -38,8 +39,11 @@ class PlayerService(BaseHTTPServer.BaseHTTPRequestHandler):
                 b = Player().betRequest(game_state)
                 if not isinstance(b, int):
                     b = 0
-            except Exception:
+                    logging.error('response is not int {}'.format(b))
+            except Exception as e:
+                logging.error('exception'.format(e))
                 b = 0
+            logging.info('betting {}'.format(b))
             response = b
         elif action == 'showdown':
             Player().showdown(game_state)

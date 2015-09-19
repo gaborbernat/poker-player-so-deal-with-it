@@ -1,3 +1,6 @@
+import logging
+
+
 class Player:
     VERSION = "Smart hands only"
     order = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
@@ -16,7 +19,9 @@ class Player:
     def betRequest(self, game_state):
         us = self.get_our_player(game_state)
         hand = self.get_cards(us)
-        return 0 if self.should_we_fold(hand) else 1000000
+        what_to_do = self.should_we_fold(hand)
+        logging.info('should we fold {} with {}'.format(what_to_do, hand))
+        return 0 if what_to_do else 1000000
 
     def showdown(self, game_state):
         pass
