@@ -8,6 +8,7 @@ __author__ = 'bnc'
 class RemoteConfig(object):
     lastLoaded = None
     config = None
+    reloadTime = 5
 
     def __init__(self, configUrl):
         self.configUrl = configUrl
@@ -22,9 +23,10 @@ class RemoteConfig(object):
 
     def _load(self):
         currentTime = time.time()
-        if self.config == None or self.lastLoaded == None or currentTime - self.lastLoaded > 5:
+        if self.config == None or self.lastLoaded == None or currentTime - self.lastLoaded > self.reloadTime:
             self.config = json.loads(urllib2.urlopen(self.configUrl).read())
             self.lastLoaded = currentTime
+            self.reloadTime = self.get('reload_time', self.reloadTime)
 
 
 class TestRemoteConfig(unittest.TestCase):
@@ -38,4 +40,4 @@ class TestRemoteConfig(unittest.TestCase):
         self.assertEqual('test value', self.config.get('test_str', None))
         endTime = time.time()
 
-        self.assertLess(endTime - startTime, 0.1)
+        self.assertLess(endTime - startTime, 0.8)
