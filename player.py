@@ -19,7 +19,7 @@ def transform_card(l):
 
 
 class Player:
-    VERSION = "1.2.1 - {}".format(config.get('version', 'unknown'))
+    VERSION = "1.3.3 - {}".format(config.get('version', 'unknown'))
     order = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     team_name = "So Deal With It "
 
@@ -29,13 +29,14 @@ class Player:
         hand_win_perc = self.hand_win_percentage(hand)
 
         raise_amount = self.action_raise(game_state, amount=1)
-        all_in_amount = self.action_all_in(game_state)
 
         if self.is_pref_flop(game_state):
-            if hand_win_perc > config.get('all_in_perc', 14.8):
-                return all_in_amount
-            if hand_win_perc > config.get('min_raise_perc', 12):
+            if hand_win_perc >= config.get('all_in_perc', 14.8):
+                return raise_amount
+            if hand_win_perc >= config.get('min_raise_perc', 12):
                 return min(raise_amount, config.get('max_raise', 500))
+            if hand_win_perc > config.get('min_raise_perc_attemptive', 10):
+                return min(raise_amount, config.get('max_attemptive_raise', 200))
             else:
                 return 0
         else:
@@ -61,7 +62,12 @@ class Player:
 
     def hand_win_percentage(self, hand):
         our_hand = self.order_cards([hand[0]['rank'], hand[1]['rank']])
-        return hands[tuple(our_hand)]
+        same = hand[0]['suit'] == hand[1]['suit']
+        h = tuple(our_hand + [''])
+        if h in hands:
+            return hands[h]
+        h = tuple(our_hand + ['s' if same else 'o'])
+        return hands[h]
 
     def order_cards(self, elements):
         return sorted(elements, key=lambda x: -1 * self.order.index(x))
