@@ -27,17 +27,17 @@ class Player:
         check_amount = self.action_check(game_state)
 
         if self.is_pref_flop(game_state):
-            if hand_win_perc > 18:
+            if hand_win_perc > 14.8:
                 return all_in_amount
-            if hand_win_perc > 15 and raise_amount >= all_in_amount:
+            if hand_win_perc > 12 and raise_amount >= all_in_amount:
                 return raise_amount
             else:
-                if hand_win_perc > 15:
+                if hand_win_perc > 10:
                     return check_amount
                 else:
                     return 0
         else:
-            if hand_win_perc < 15:
+            if hand_win_perc < 13:
                 return check_amount
             else:
                 return raise_amount
