@@ -32,10 +32,7 @@ class Player:
             if hand_win_perc > 12 and raise_amount >= all_in_amount:
                 return raise_amount
             else:
-                if hand_win_perc > 10:
-                    return check_amount
-                else:
-                    return 0
+                return check_amount
         else:
             if hand_win_perc < 13:
                 return check_amount
