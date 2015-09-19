@@ -1,5 +1,5 @@
 import logging
-
+from hands import hands
 
 class Player:
     VERSION = "Smart hands only"
