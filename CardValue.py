@@ -111,16 +111,42 @@ class CardValue:
         return False
 
     def has_drill(self, cards):
+        dist = self.get_card_dist(cards)
+        for rank, num in dist.iteritems():
+            if num >= 3:
+                print("Found drill")
+                return True
         return False
 
     def has_2p(self, cards):
+        dist = self.get_card_dist(cards)
+        found = False
+        for rank, num in dist.iteritems():
+            if num >= 2 and found is True:
+                print("Found 2 pair")
+                return True
+            elif num >= 2 and not found:
+                found = True
         return False
 
     def has_p(self, cards):
+        for i in range(0, len(cards)-1):
+            if cards[i][0] == cards[i+1][0]:
+                print("Found pair")
+                return True
         return False
 
     def has_high(self, cards):
+        for card in cards:
+            if card[0] in ['J', 'Q', 'K', 'A']:
+                print("Found high card")
+                return True
         return False
+
+    def get_card_dist(self, cards):
+        return {card[0]: len([x for x in cards if x[0] == card[0]]) for card in cards}
+
+
 
 
 if __name__ == '__main__':
@@ -133,4 +159,7 @@ if __name__ == '__main__':
     #assert 12 == CardValue().getSingleCardValue(Card("K"))
     #assert 0 == CardValue().getSingleCardValue(Card("invalid"))
 
-    print(CardValue().find_hand_name([('6', 'spades'), ('4', 'diamonds'), ('5', 'spades'), ('K', 'hearts'), ('J', 'spades')]))
+    cards = [('6', 'spades'), ('6', 'diamonds'), ('6', 'spades'), ('5', 'hearts'), ('J', 'spades')]
+
+    print(CardValue().find_hand_name(cards))
+    print(CardValue().get_card_dist(cards))
