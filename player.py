@@ -19,7 +19,7 @@ def transform_card(l):
 
 
 class Player:
-    VERSION = "1.3.2 - {}".format(config.get('version', 'unknown'))
+    VERSION = "1.3.3 - {}".format(config.get('version', 'unknown'))
     order = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     team_name = "So Deal With It "
 
