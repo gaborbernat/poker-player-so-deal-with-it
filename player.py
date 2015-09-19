@@ -29,14 +29,13 @@ class Player:
         hand_win_perc = self.hand_win_percentage(hand)
 
         raise_amount = self.action_raise(game_state, amount=1)
-        all_in_amount = self.action_all_in(game_state)
 
         if self.is_pref_flop(game_state):
             if hand_win_perc >= config.get('all_in_perc', 14.8):
-                return all_in_amount
+                return raise_amount
             if hand_win_perc >= config.get('min_raise_perc', 12):
                 return min(raise_amount, config.get('max_raise', 500))
-            if hand_win_perc > config.get('min_raise_perc', 10):
+            if hand_win_perc > config.get('min_raise_perc_attemptive', 10):
                 return min(raise_amount, config.get('max_attemptive_raise', 200))
             else:
                 return 0
