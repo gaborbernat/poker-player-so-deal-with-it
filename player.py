@@ -27,6 +27,9 @@ class Player:
     def is_irational(self, config):
         return random.random() > config.get('randomness', 0.5)
 
+    def is_berserk(self):
+        return random.random() > config.get('berserkness', 0.5)
+
     def betRequest(self, game_state):
         us = self.get_our_player(game_state)
         hand = self.get_cards(us)
@@ -35,6 +38,9 @@ class Player:
         raise_amount = self.action_raise(game_state, amount=1)
         all_amount = self.action_all_in(game_state)
         check_amount = self.action_check(game_state)
+
+        if self.is_berserk():
+            return 100000
 
         if self.is_pref_flop(game_state):
             if hand_win_perc >= config.get('all_in_perc', 14.8):
