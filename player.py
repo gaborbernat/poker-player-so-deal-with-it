@@ -1,6 +1,7 @@
 import logging
 from hands import hands
 
+
 def r(w, i, d):
     x = w
     found = False
@@ -19,9 +20,13 @@ class Player:
     def betRequest(self, game_state):
         us = self.get_our_player(game_state)
         hand = self.get_cards(us)
-        what_to_do = self.should_we_fold(hand)
-        logging.info('should we fold {} with {}'.format(what_to_do, hand))
-        return 0 if what_to_do else 1000000
+        hand_win_perc = self.hand_win_percentage(hand)
+
+        if self.is_pref_flop(game_state):
+            return self.action_all_in(game_state) if hand_win_perc > 18 else (
+                self.action_raise(game_state, amount=1) if hand_win_perc > 15 else self.action_check(game_state))
+        else:
+            return self.action_check(game_state) if hand_win_perc < 15 else self.action_raise(game_state, amount=1)
 
     def is_pref_flop(self, game_state):
         return len(self.get_community_cards(game_state)) == 0
@@ -32,13 +37,26 @@ class Player:
     def showdown(self, game_state):
         pass
 
-    def should_we_fold(self, hand):
+    def hand_win_percentage(self, hand):
         our_hand = self.order_cards([hand[0]['rank'], hand[1]['rank']])
-        percentage = hands[tuple(our_hand)]
-        return percentage < 14
+        return hands[tuple(our_hand)]
 
     def order_cards(self, elements):
         return sorted(elements, key=lambda x: -1 * self.order.index(x))
+
+    def action_all_in(self, game_state):
+        # current buy in + all the money we still have
+        return r(game_state, ['current_buy_in'], 0) + self.get_our_player(game_state).get("stack", 0)
+
+    def action_check(self, game_state):
+        # current buy in - our chips = check (or fold is there is another raise)
+        return r(game_state, ['current_buy_in'], 0) - self.get_our_player(game_state).get("bet", 0)
+
+    def action_raise(self, game_state, amount=0):
+        # current buy in + minimal raise + raise you want to do
+        return r(game_state, ['current_buy_in'], 0) - self.get_our_player().get("bet", 0) + r(game_state,
+                                                                                              ['minimum_raise'],
+                                                                                              0) + amount
 
     @staticmethod
     def get_cards(player):
