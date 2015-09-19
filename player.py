@@ -13,8 +13,12 @@ def r(w, i, d):
     return x if found else d
 
 
+def transform_card(l):
+    return [(f['rank'], f['suit']) for f in l]
+
+
 class Player:
-    VERSION = "1.0.2"
+    VERSION = "1.1.0"
     order = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     team_name = "So Deal With It "
 
@@ -25,7 +29,6 @@ class Player:
 
         raise_amount = self.action_raise(game_state, amount=1)
         all_in_amount = self.action_all_in(game_state)
-        check_amount = self.action_check(game_state)
 
         if self.is_pref_flop(game_state):
             if hand_win_perc > 14.8:
@@ -35,8 +38,13 @@ class Player:
             else:
                 return 0
         else:
-            # CardValue().find_card_score(sszes lap) - CardValue().find_card_score(commutiy lap)
-            if hand_win_perc < 11:
+            community_cards = transform_card(self.get_community_cards(game_state))
+            our_cards = transform_card(hand)
+            c = CardValue()
+            all_score = c.find_card_score(our_cards + community_cards)
+            community_score = c.find_card_score(community_cards)
+            score = all_score - community_score
+            if score <= 80:
                 return 0
             else:
                 return raise_amount
