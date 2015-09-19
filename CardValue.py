@@ -107,6 +107,12 @@ class CardValue:
         return False
 
     def has_full_house(self, cards):
+        dist = self.get_card_dist(cards)
+        if len(dist) == 2:
+            if dist.values() == [3, 2] or dist.values() == [2, 3]:
+                print("Found full house")
+                return True
+
         return False
 
     def has_flush(self, cards):
@@ -173,7 +179,7 @@ if __name__ == '__main__':
     #assert 12 == CardValue().getSingleCardValue(Card("K"))
     #assert 0 == CardValue().getSingleCardValue(Card("invalid"))
 
-    cards = [('6', 'spades'), ('6', 'diamonds'), ('6', 'spades'), ('5', 'hearts'), ('J', 'spades')]
+    cards = [('6', 'spades'), ('6', 'diamonds'), ('6', 'spades'), ('5', 'hearts'), ('5', 'spades')]
 
     print(CardValue().find_hand_name(cards))
     print(CardValue().get_card_dist(cards))
