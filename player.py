@@ -54,9 +54,8 @@ class Player:
 
     def action_raise(self, game_state, amount=0):
         # current buy in + minimal raise + raise you want to do
-        return r(game_state, ['current_buy_in'], 0) - self.get_our_player().get("bet", 0) + r(game_state,
-                                                                                              ['minimum_raise'],
-                                                                                              0) + amount
+        return r(game_state, ['current_buy_in'], 0) - self.get_our_player(game_state).get("bet", 0) + \
+               r(game_state, ['minimum_raise'], 0) + amount
 
     @staticmethod
     def get_cards(player):
