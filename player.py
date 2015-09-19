@@ -19,7 +19,7 @@ def transform_card(l):
 
 
 class Player:
-    VERSION = "1.2.1 - {}".format(config.get('version', 'unknown'))
+    VERSION = "1.3.1 - {}".format(config.get('version', 'unknown'))
     order = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     team_name = "So Deal With It "
 
@@ -61,7 +61,12 @@ class Player:
 
     def hand_win_percentage(self, hand):
         our_hand = self.order_cards([hand[0]['rank'], hand[1]['rank']])
-        return hands[tuple(our_hand)]
+        same = hand[0]['suit'] == hand[1]['suit']
+        h = tuple(our_hand + [''])
+        if h in hands:
+            return hands[h]
+        h = tuple(our_hand + ['s' if same else 'o'])
+        return hands[h]
 
     def order_cards(self, elements):
         return sorted(elements, key=lambda x: -1 * self.order.index(x))

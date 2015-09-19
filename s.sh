@@ -1,0 +1,1 @@
+echo $1 | sed s_tour_api/tour_g | sed -E 's_step.*_log_g' | xargs curl | gunzip - | jq ".[$2]"
