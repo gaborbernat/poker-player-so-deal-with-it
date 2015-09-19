@@ -99,6 +99,11 @@ class CardValue:
         return False
 
     def has_poker(self, cards):
+        dist = self.get_card_dist(cards)
+        for rank, num in dist.iteritems():
+            if num >= 4:
+                print("Found poker")
+                return True
         return False
 
     def has_full_house(self, cards):
